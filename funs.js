@@ -1,5 +1,6 @@
 const m_Colors = ['w', 'b'];
 const m_PieceTypes = ['P', 'N', 'B', 'R', 'Q', 'K'];
+const m_GameResult = ["Black won", "Drawn", "White won"]
 
 function parseRawBytes(byteString) {
     let byteArray = byteString
@@ -62,6 +63,29 @@ function tzcnt(num) {
     return count;
 }
 
+function squareName(sq) {
+    return String.fromCharCode(65 + sq % 8) + String.fromCharCode(49 + sq / 8);
+}
+
+function formatScore(score) {
+    let disc = score < 0 ? 'Black' 
+             : score > 0 ? 'White'
+             :              'Neither side';
+    return `${score} (${disc} is winning)`;
+}
+
+function formatResult(result) {
+    return `${result} (${m_GameResult[result]})`;
+}
+
+function formatKsq(ksq) {
+    return `${ksq} (${squareName(ksq)})`;
+}
+
+function formatOppKsq(opp_ksq) {
+    return `${opp_ksq} (${squareName(opp_ksq ^ 56)})`;
+}
+
 function bytesToSignedInt16(byte1, byte2) {
     const dataView = new DataView(new ArrayBuffer(2));
     dataView.setUint8(0, byte1);
@@ -79,10 +103,10 @@ function parseData() {
 
         $('#tfOccupancy').text(result.occupancy)
         $('#tfPcs').text(result.pcs.join(' '))
-        $('#tfScore').text(result.score)
-        $('#tfResult').text(result.result)
-        $('#tfKsq').text(result.ksq)
-        $('#tfOppKsq').text(result.opp_ksq)
+        $('#tfScore').text(formatScore(result.score))
+        $('#tfResult').text(formatResult(result.result))
+        $('#tfKsq').text(formatKsq(result.ksq))
+        $('#tfOppKsq').text(formatOppKsq(result.opp_ksq))
 
         let piecesArray = handlePiecesArray(result.pcs, result.occupancy)
         const postn = piecesArray.reduce((accumulator, current) => {
