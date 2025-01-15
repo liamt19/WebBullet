@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>WebBullet</title>
+  <link rel="stylesheet" href="/chessboardjs/css/chessboard-1.0.0.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+  <script src="/js/funs.js"></script>
+
+</head>
+
+
+<body>
+<div id="fullContainer" class="full-container">
+    <div id="myBoard" style="width: 500px"></div>
+
+    <div class="info-container">
+        <label>Raw Data</label>
+        <textarea id="rawDataField" class="raw-data-box" rows="4" maxlength="95"></textarea>
+    
+        <label>Occupancy</label>
+        <textarea id="tfOccupancy" readonly class="info-box" rows="1"></textarea>
+    
+        <label>Pieces</label>
+        <textarea id="tfPcs" readonly class="info-box"></textarea>
+        
+        <label>Score</label>
+        <textarea id="tfScore" readonly class="info-box" rows="1"></textarea>
+    
+        <label>Result</label>
+        <textarea id="tfResult" readonly class="info-box" rows="1"></textarea>
+    
+        <label>Ksq</label>
+        <textarea id="tfKsq" readonly class="info-box" rows="1"></textarea>
+    
+        <label>Opp Ksq</label>
+        <textarea id="tfOppKsq" readonly class="info-box" rows="1"></textarea>
+    </div>
+</div>
+
+<br>
+<label>FEN</label>
+<textarea id="tfFEN" readonly class="fen-box" rows="1"></textarea>
+
+    <script>
+        var boardConfig = {
+            pieceTheme: 'chessboardjs/img/chesspieces/wikipedia/{piece}.png',
+            position: 'start'
+        }
+        
+        var board = Chessboard('myBoard', boardConfig)
+        
+        $('#rawDataField').on("input", parseData);
+        $(document).ready(function() { parseData() });
+        
+        const defData = "DD E2 55 0C 04 63 F9 6E 23 54 31 00 02 10 00 00 98 98 88 88 A8 B8 CA DB EC FF 00 04 06 01 B4 0F";
+        $('#rawDataField').text(defData);
+    </script>
+
+</body>
+</html>

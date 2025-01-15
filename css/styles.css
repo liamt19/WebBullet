@@ -1,0 +1,41 @@
+
+.info-container {
+    display:grid;
+    grid-template-columns: 10ch 32ch;
+    grid-gap:10px;
+}
+
+.info-container label {
+    text-align: right;
+}
+
+.info-box {
+    border: 2px solid #000000;
+    resize: none;
+    font-size: 14px;
+    height: fit-content;
+    min-height: 75%;
+}
+
+.full-container {
+    display: flex;
+}
+
+.raw-data-box {
+    resize: none;
+    font-size: 16px;
+    line-height:1.4;
+    width:24ch;
+    max-height: 75%;
+}
+
+.fen-box {
+    width: 90ch;
+    resize: none;
+    font-size: 14px;
+}
+
+body {
+    background-color:rgb(182, 184, 184);
+    font-family: Consolas,"courier new";
+}
